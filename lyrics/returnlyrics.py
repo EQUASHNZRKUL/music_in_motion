@@ -34,10 +34,9 @@ def getlyricsstring(artist, song):
     by '/n'. 
 '''
 def listifylyrics(lyrics):
-    lyrics = lyrics.replace("\n\n", "\n") # remove to keep stanzas separated
     lyacc = []
-    while ('\n' in lyrics):
-        loc = lyrics.find('\n')
+    while ('\n\n' in lyrics):
+        loc = lyrics.find('\n\n')
         lyacc = lyacc + [lyrics[:loc]]
         lyrics = lyrics[loc+1:]
     return lyacc + [lyrics]
