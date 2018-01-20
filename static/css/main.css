@@ -1,0 +1,133 @@
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  width: 100%;
+  padding: 10% 32px 0px 32px;
+}
+
+html {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  -webkit-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+html, h1, h2, h3, h4, h5, h6,
+p, blockquote, pre, hr,
+dl, dd, ol, ul, figure {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  background-color: #13202b;
+  font-family: "Lato", sans-serif;
+  font-size: 16px;
+  font-size: 1rem;
+  color: #f5f5f5;
+  font-weight: 300;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
+  color: #62a6ff;
+}
+
+.logo {
+  font-family: "Righteous", sans-serif;
+  color: #00b359;
+  font-size: 96px;
+  font-size: 6rem;
+  display: block;
+  text-align: center;
+}
+
+.logo .fa-music {
+  display: block;
+  font-size: 64px;
+  font-size: 4rem;
+}
+
+.input-form {
+  max-width: 900px;
+  margin: 32px auto;
+  text-align: center;
+}
+
+.input-wrapper {
+  width: 75%;
+  display: inline-block;
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  background: #13202b;
+  padding: 6px 6px 6px 48px;
+  border: unset;
+  border-bottom: 2px solid #8d8d8d;
+  font-family: "Lato", sans-serif;
+  font-size: 36px;
+  font-size: 2.25rem;
+  color: #f5f5f5;
+  outline: none;
+  transition: .2s ease-in-out;
+}
+
+.input:focus {
+  border-color: #62a6ff;
+}
+
+.input:focus ~ .placeholder {
+  color: #62a6ff;
+}
+
+.placeholder {
+  position: absolute;
+  top: 6px;
+  left: 2px;
+  font-size: 36px;
+  font-size: 2.25rem;
+  color: #8d8d8d;
+  transition: .2s ease-in-out;
+}
+
+.input-btn {
+  background: transparent;
+  width: 64px;
+  height: 64px;
+  border: 2px solid #8d8d8d;
+  margin-left: 16px;
+  color: #8d8d8d;
+  font-size: 36px;
+  font-size: 2.25rem;
+  display: inline-flex;
+  justify-content: center;
+  padding-left: 12px;
+  align-items: center;
+  border-radius: 50%;
+  outline: none;
+  transition: .2s ease-in-out;
+}
+
+.input-btn:hover {
+  color: #62a6ff;
+  border-color: #62a6ff;
+}
+
+.input-btn:active {
+  color: #13202b;
+  border-color: #62a6ff;
+  background: #62a6ff;
+}

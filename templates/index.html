@@ -1,9 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#00b359">
+  <title>Music N Motion</title>
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700|Righteous" rel="stylesheet">
+  <script src="https://use.fontawesome.com/7b04bb0313.js"></script>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/main.min.css') }}" />
 </head>
-
 <body>
-  <div id="reactEntry"></div>
+  <div id="app">
 
+  </div>
   <!-- Attach React components -->
   <script type="text/javascript" src="{{ url_for('static', filename='bundle.js') }}"></script>
 </body>
+</html>
