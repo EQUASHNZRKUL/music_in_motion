@@ -34,12 +34,12 @@ def getlyricsstring(artist, song):
     by '/n'. 
 '''
 def listifylyrics(lyrics):
+    lyrics = lyrics.replace("\n\n", "\n") # remove to keep stanzas separated
     lyacc = []
     while ('\n' in lyrics):
         loc = lyrics.find('\n')
         lyacc = lyacc + [lyrics[:loc]]
-        print(lyacc)
-        lyrics = lyrics[loc+2:]
+        lyrics = lyrics[loc+1:]
     return lyacc
 
 ''' getlyrics(artist, song) getes the lyrics of a given song by a given artist
