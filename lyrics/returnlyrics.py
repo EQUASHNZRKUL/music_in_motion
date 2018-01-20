@@ -40,7 +40,7 @@ def listifylyrics(lyrics):
         loc = lyrics.find('\n')
         lyacc = lyacc + [lyrics[:loc]]
         lyrics = lyrics[loc+1:]
-    return lyacc
+    return lyacc + [lyrics]
 
 ''' getlyrics(artist, song) getes the lyrics of a given song by a given artist
     and returns it as a list of lines as individual strings. 
