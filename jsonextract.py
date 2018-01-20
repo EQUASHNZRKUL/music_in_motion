@@ -7,7 +7,7 @@ def jsonextract(filename):
         d = json.load(json_data)
         return d
 
-def get_features(song_name):
+def get_duration(song_name):
     # first we need to authenticate
     # client_id = ...
     # client_secret = ...
@@ -22,6 +22,19 @@ def get_features(song_name):
     heads = {}
     file = open("spotify_key.txt", 'r')
     key = file.read()
+    heads["authorization"] = "Bearer " + key[0:(len(key)-1)]
+    params = {}
+    params["q"] = song_name
+    params["type"] = "track"
+    url = "https://api.spotify.com/v1/search"
+    response = requests.request("GET", url, headers=heads, params=params)
+    song_id_json = json.loads(response.text)
+    return song_id_json['track']['items'][0]['duration']
+
+def get_top_five(song_name):
+    heads = {}
+    file = open("spotify_key.txt", 'r')
+    key = file.read()
     heads["authorization"] = "Bearer " + key
     params = {}
     params["q"] = song_name
@@ -29,4 +42,15 @@ def get_features(song_name):
     url = "https://api.spotify.com/v1/search"
     response = requests.request("GET", url, headers=heads, params=params)
     song_id_json = json.loads(response.text)
-    song_id = song_id_json['track']['items'][0]['id']
+    songs = song_id_json['track']['items']
+    info_lst = []
+    for i in range(0, 4):
+        info = {}
+
+
+
+
+    return song_id_json['track']['items'][0]['duration']
+
+# top five: album art, album name, artist name, song name
+
