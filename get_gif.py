@@ -1,6 +1,7 @@
 import requests
 import json
-
+import urllib
+import urllib2
 
 def gif_from_string(str):
     #  Extract key phrase from string
@@ -37,4 +38,19 @@ def gif_from_string(str):
         string_2_search = r2["documents"][0]["keyPhrases"][0]
     else:
         string_2_search = ""
-    print string_2_search
+    print(string_2_search)
+    # now we get the gif
+    file2 = open("key2.txt", 'r')
+    key2 = file2.read()
+    params = urllib.urlencode({
+        'limit': '1',
+        'rating': 'pg',
+        'lang': 'en',
+        'api_key': key2[0:(len(key2)-1)],
+        'q': string_2_search
+    })
+    r2 = urllib2.urlopen('api.giphy.com/v1/gifs/search?' + params)
+    r2_read = r2.read()
+    r2_load = json.loads(r2_read)
+    gif_url = r2_load["data"][0]["embed_url"]
+    return gif_url
