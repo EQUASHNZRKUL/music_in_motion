@@ -39,6 +39,7 @@ def gif_from_string(str):
     else:
         string_2_search = ""
     print(string_2_search)
+    
     # now we get the gif
     file2 = open("key2.txt", 'r')
     key2 = file2.read()
