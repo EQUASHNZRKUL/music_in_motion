@@ -37,7 +37,8 @@ def listifylyrics(lyrics):
     lyacc = []
     while ('\n' in lyrics):
         loc = lyrics.find('\n')
-        lyacc = lyacc.append(lyrics[:loc])
+        lyacc = lyacc + [lyrics[:loc]]
+        print(lyacc)
         lyrics = lyrics[loc+2:]
     return lyacc
 
@@ -45,6 +46,6 @@ def listifylyrics(lyrics):
     and returns it as a list of lines as individual strings. 
 '''
 def getlyrics(artist, song):
-    lyricsstring = getlyricsstring(artist, song)
+    lyricsstring, lyricsurl = getlyricsstring(artist, song)
     return listifylyrics(lyricsstring)
     
