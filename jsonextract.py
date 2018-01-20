@@ -46,11 +46,10 @@ def get_top_five(song_name):
     info_lst = []
     for i in range(0, 4):
         info = {}
+        info['track_name'] = songs[i]['name']
+        info['artist_name'] = songs[i]['artists'][0]['name']
+        info['album_name'] = songs[i]['album']['name']
+        info['album_art'] = songs[i]['album']['images'][3]['url']
+        info_lst.append(info)
 
-
-
-
-    return song_id_json['track']['items'][0]['duration']
-
-# top five: album art, album name, artist name, song name
-
+    return info_lst
