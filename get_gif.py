@@ -53,3 +53,4 @@ def gif_from_string(str):
     r2_read = r2.read()
     r2_load = json.loads(r2_read)
     gif_url = r2_load["data"][0]["embed_url"]
+    return gif_url
