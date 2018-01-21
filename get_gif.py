@@ -63,7 +63,7 @@ def gifs_from_string(s):
         r2_read = r2.read()
         print r2_read
         r2_load = json.loads(r2_read)
-        gif_url = r2_load["data"][0]["embed_url"]
+        gif_url = r2_load["data"][0]["images"]["original"]["url"]
         gif_frames = r2_load["data"][0]["images"]["original"]["frames"]
         framerate = 15 # assume 15 fps
         duration = int(gif_frames) / framerate
