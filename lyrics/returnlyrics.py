@@ -43,7 +43,8 @@ def listifylyrics(lyrics):
     return lyacc + [lyrics]
 
 ''' getlyrics(artist, song) gets the lyrics of a given song by a given artist
-    and returns it as a list of lines as individual strings. 
+    and returns it as a list of lines as individual strings. It also returns
+    the duration of a gif segment as the snd in a tuple. 
 '''
 def getlyrics(artist, song):
     lyricsstring, lyricsurl = getlyricsstring(artist, song) #can possibly return url
