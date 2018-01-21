@@ -48,10 +48,26 @@ def get_songs():
 @app.route('/getGifs', methods=['POST'])
 def get_gifs():
   title = request.get_json()['songId']
+  res = json.dumps({
+    "gifs" : [
+    {"url" : "https://thumbs.gfycat.com/SpryImpressiveDinosaur-size_restricted.gif", 
+    "duration" : 5},
+    {"url" : "https://thumbs.gfycat.com/TerribleSinfulAsp-size_restricted.gif", 
+    "duration" : 2},
+    {"url" : "https://thumbs.gfycat.com/JadedHarmlessKilldeer-size_restricted.gif", 
+     "duration" : 7}
+    ]
+  })
+  return res
+
+@app.route('/getGifs2', methods=['POST'])
+def get_gifs2():
+  title = request.get_json()['songId']
   gifdata = youtube_lyrics.search_video(title)
   giflist = get_gif.wesify_giflist(gifdata[0], gifdata[1])
   res = json.dumps({"gifs" : giflist})
   return res
+
 
 if __name__ == '__main__':
   app.run(debug=True)

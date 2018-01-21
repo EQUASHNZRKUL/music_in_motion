@@ -181,17 +181,20 @@ class Main extends React.Component {
   }
 
   getCurrentGif() {
-    if (this.state.gifIndex !== -1) {
+    if (this.state.gifIndex > 0 &
+        & this.state.gifIndex < this.state.gifs.length) {
       let i = this.state.gifIndex;
       let currGif = this.state.gifs[i].url;
       console.log(currGif);
-      let currTime = this.state.timings[i].duration;
-      this.setState({currGifUrl : currGif},  setTimeout(() => {
+      let currTime = this.state.gifs[i].duration;
+      console.log(currTime);
+      this.setState({currGifUrl : currGif});
+      setTimeout(() => {
         this.setState({ gifIndex: (i+1)});
         this.getCurrentGif();
-      }, currTime));
+      }, currTime * 1000);
     } else {
-      console.log("hi");
+      this.setState({ gifIndex: -1, currGifUrl: ""});
     }
   }
 
