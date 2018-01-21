@@ -3,7 +3,7 @@ import json
 import urllib
 import urllib2
 
-def gifs_from_string(str):
+def gifs_from_string(s):
     #  Extract key phrases from string
     #  return corresponding gifs
     #  Request body:
@@ -18,13 +18,14 @@ def gifs_from_string(str):
       ]
     }
     '''
+    print s
     raw = {}
-    raw["text"] = str
+    raw["text"] = s
     raw["language"] = "en"
     raw["id"] = "string"
     outer = {}
     outer["documents"] = [raw]
-    dta = json.loads(outer)
+    dta = json.dumps(outer)
     file = open("key.txt", 'r')
     key = file.read()
     headers = {
@@ -38,7 +39,9 @@ def gifs_from_string(str):
         r2 = json.loads(r.text)
         string_2_search = r2["documents"][0]["keyPhrases"]
     else:
-        string_2_search = []
+        string_2_search = s
+    if string_2_search == []:
+        string_2_search = s
     print(string_2_search)
     
     # now we get the gifs
@@ -55,7 +58,7 @@ def gifs_from_string(str):
             'api_key': key2[0:(len(key2)-1)],
             'q': phrase
         })
-        r2 = urllib2.urlopen('api.giphy.com/v1/gifs/search?' + params)
+        r2 = urllib2.urlopen('http://api.giphy.com/v1/gifs/search?' + params)
         r2_read = r2.read()
         r2_load = json.loads(r2_read)
         gif_url = r2_load["data"][0]["embed_url"]
