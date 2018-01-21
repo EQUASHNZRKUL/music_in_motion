@@ -171,7 +171,8 @@ class Main extends React.Component {
   }
 
   retrieveGifs() {
-    let data = { songId : this.state.currSongId }
+    let data = { songId : this.state.currSongId, songTitle : this.state.inputValue };
+    console.log(data);
     axios.post('/getGifs', data)
       .then(res => {
         this.setState({
@@ -181,8 +182,7 @@ class Main extends React.Component {
   }
 
   getCurrentGif() {
-    if (this.state.gifIndex > 0 &
-        & this.state.gifIndex < this.state.gifs.length) {
+    if (this.state.gifIndex > 0 && this.state.gifIndex < this.state.gifs.length) {
       let i = this.state.gifIndex;
       let currGif = this.state.gifs[i].url;
       console.log(currGif);
@@ -193,6 +193,19 @@ class Main extends React.Component {
         this.setState({ gifIndex: (i+1)});
         this.getCurrentGif();
       }, currTime * 1000);
+    } else if (this.state.gifIndex === 0) {
+      setTimeout(() => {
+        let i = this.state.gifIndex;
+        let currGif = this.state.gifs[i].url;
+        console.log(currGif);
+        let currTime = this.state.gifs[i].duration;
+        console.log(currTime);
+        this.setState({currGifUrl : currGif});
+        setTimeout(() => {
+          this.setState({ gifIndex: (i+1)});
+          this.getCurrentGif();
+        }, currTime * 1000);
+      }, 1000);
     } else {
       this.setState({ gifIndex: -1, currGifUrl: ""});
     }
@@ -201,13 +214,18 @@ class Main extends React.Component {
   // get gifs
   handleClickSearchEntry(i) {
     let selected = this.state.searchResults[i];
+    console.log(selected);
     this.setState({
       currSongUri: selected.uri,
       currSongId: selected.id,
       inputValue: selected.title,
       hideTopBtn: false,
       gifIndex: 0,
-    }, this.retrieveGifs());
+    },  () => {
+      console.log(this.state);
+      this.retrieveGifs();
+    });
+
   }
 
   handleInputChange(e) {
