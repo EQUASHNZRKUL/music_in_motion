@@ -100,10 +100,10 @@ def wesify_giflist(gifarray, duration_list, start_list):
     wes_list = []
     for i in range(len(duration_list)):
         giflist = gifarray[i]
-        if (i == (len(duration_list)-2)):
+        if (i >= (len(duration_list)-2)):
             duration_lim = duration_list[i]
         else:
-            duration_lim = start_list[i+1] - start_list[i]
+            duration_lim = int(start_list[i+1]) - int(start_list[i])
         duracc = 0
         for giftuple in giflist:
             duration = giftuple[1]

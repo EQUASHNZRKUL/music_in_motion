@@ -68,9 +68,12 @@ def get_songs():
 
 @app.route('/getGifs', methods=['POST'])
 def get_gifs():
-  title = request.get_json()['songTitle']
+  r = request.get_json()
+  title = r['songTitle']
+  artist = r['artist']
+  print (artist)
   print (title)
-  gifdata = youtube_lyrics.search_video(title)
+  gifdata = youtube_lyrics.search_video(title, artist)
   giflist = get_gif.wesify_giflist(gifdata[0], gifdata[1], gifdata[2])
   res = json.dumps({"gifs" : giflist})
   print (gifdata)
@@ -78,5 +81,5 @@ def get_gifs():
 
 
 if __name__ == '__main__':
-  app.run(debug=True)
+  app.run(debug=True, host='0.0.0.0',port=80)
 

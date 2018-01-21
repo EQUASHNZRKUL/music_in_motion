@@ -177,6 +177,7 @@ class Main extends React.Component {
       gifIndex: -1,
       isLoading: false,
       notFound: false,
+      selectedSong: null,
     };
   }
 
@@ -202,7 +203,7 @@ class Main extends React.Component {
   }
 
   retrieveGifs() {
-    let data = { songId : this.state.currSongId, songTitle : this.state.inputValue };
+    let data = { songId : this.state.currSongId, songTitle : this.state.inputValue, artist : this.state.selectedSong.artist };
     console.log(data);
     this.setState({
       isLoading: true,
@@ -258,6 +259,7 @@ class Main extends React.Component {
       inputValue: selected.title,
       hideTopBtn: false,
       gifIndex: -1,
+      selectedSong: selected
     },  () => {
       console.log(this.state);
       this.retrieveGifs();
@@ -278,6 +280,7 @@ class Main extends React.Component {
         gifs: [],
         currGifUrl: "",
         notFound: false,
+        selectedSong: null,
         // gifIndex: -1,
       });
     }

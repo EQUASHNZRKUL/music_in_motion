@@ -35,8 +35,8 @@ def get_lyrics(id):
 
     return (lst, new_list2, nl3)
 
-def search_video(name):
-    query = urllib.quote(name)
+def search_video(name, artist):
+    query = urllib.quote(name + " " + artist)
     url = "https://www.youtube.com/results?sp=EgIoAQ%253D%253D&search_query=" + query
     response = urllib2.urlopen(url)
     html = response.read()
