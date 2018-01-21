@@ -3,8 +3,9 @@ import json
 import urllib
 import urllib2
 
-def gif_from_string(str):
-    #  Extract key phrase from string
+def gifs_from_string(str):
+    #  Extract key phrases from string
+    #  return corresponding gifs
     #  Request body:
     '''
     {
@@ -35,22 +36,35 @@ def gif_from_string(str):
     r = requests.post(url, data=dta, headers=headers)
     if r.status_code == 200:
         r2 = json.loads(r.text)
-        string_2_search = r2["documents"][0]["keyPhrases"][0]
+        string_2_search = r2["documents"][0]["keyPhrases"]
     else:
-        string_2_search = ""
+        string_2_search = []
     print(string_2_search)
-    # now we get the gif
+    
+    # now we get the gifs
     file2 = open("key2.txt", 'r')
     key2 = file2.read()
-    params = urllib.urlencode({
-        'limit': '1',
-        'rating': 'pg',
-        'lang': 'en',
-        'api_key': key2[0:(len(key2)-1)],
-        'q': string_2_search
-    })
-    r2 = urllib2.urlopen('api.giphy.com/v1/gifs/search?' + params)
-    r2_read = r2.read()
-    r2_load = json.loads(r2_read)
-    gif_url = r2_load["data"][0]["embed_url"]
-    return gif_url
+    
+    url_lst = []
+
+    for phrase in string_2_search:
+        params = urllib.urlencode({
+            'limit': '2',
+            'rating': 'pg',
+            'lang': 'en',
+            'api_key': key2[0:(len(key2)-1)],
+            'q': phrase
+        })
+        r2 = urllib2.urlopen('api.giphy.com/v1/gifs/search?' + params)
+        r2_read = r2.read()
+        r2_load = json.loads(r2_read)
+        gif_url = r2_load["data"][0]["embed_url"]
+        url_lst.append(gif_url)
+    return url_lst
+
+def get_gif_list(stanza_lst):
+    # Takes a list of stanzas and returns a list each entry of which is a list of gifs for that stanza
+    gifs = []
+    for stanza in stanza_lst:
+        gif_urls = gifs_from_string(stanza)
+        gif_lst.append(gif_urls)

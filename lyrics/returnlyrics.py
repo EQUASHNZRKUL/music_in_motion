@@ -7,6 +7,7 @@ import sys
 import re
 import lyrics as minilyrics
 import services as s
+import jsonextract
 
 services_list2 = [s._wikia, s._musixmatch, s._songmeanings, s._songlyrics, s._genius, s._versuri]
 
@@ -35,16 +36,16 @@ def getlyricsstring(artist, song):
 '''
 def listifylyrics(lyrics):
     lyacc = []
-    while ('\n' in lyrics):
-        loc = lyrics.find('\n')
-        lyacc = lyacc.append(lyrics[:loc])
-        lyrics = lyrics[loc+2:]
-    return lyacc
+    while ('\n\n' in lyrics):
+        loc = lyrics.find('\n\n')
+        lyacc = lyacc + [lyrics[:loc]]
+        lyrics = lyrics[loc+1:]
+    return lyacc + [lyrics]
 
-''' getlyrics(artist, song) getes the lyrics of a given song by a given artist
+''' getlyrics(artist, song) gets the lyrics of a given song by a given artist
     and returns it as a list of lines as individual strings. 
 '''
 def getlyrics(artist, song):
-    lyricsstring = getlyricsstring(artist, song)
-    return listifylyrics(lyricsstring)
-    
+    lyricsstring, lyricsurl = getlyricsstring(artist, song) #can possibly return url
+    total_duration = jsonextract.get_duration(song)
+    return (listifylyrics(lyricsstring), (total_duration / len(lyric_list))
