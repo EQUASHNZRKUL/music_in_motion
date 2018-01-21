@@ -13,6 +13,30 @@ class Logo extends React.Component{
   }
 }
 
+function LoadingOverlay(props) {
+  if (props.isLoading) {
+    return (<div className="loading-overlay">
+      <i className="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+      <span className="sr-only">Loading...</span>
+    </div>);
+  } else {
+    return "";
+  }
+}
+
+function NotFoundMessage(props) {
+  if (props.notFound) {
+    return (
+      <div className="not-found-wrapper">
+        <h1 className="not-found">No gifs found</h1>
+      </div>
+    );
+  } else {
+    return "";
+  }
+
+}
+
 function PlayButton (props) {
   if (props.currSongUri === "") {
     return "";
@@ -151,6 +175,8 @@ class Main extends React.Component {
       hideTopBtn: false,
       currGifUrl: "",
       gifIndex: -1,
+      isLoading: false,
+      notFound: false,
     };
   }
 
@@ -178,10 +204,14 @@ class Main extends React.Component {
   retrieveGifs() {
     let data = { songId : this.state.currSongId, songTitle : this.state.inputValue };
     console.log(data);
+    this.setState({
+      isLoading: true,
+    });
     axios.post('/getGifs', data)
       .then(res => {
         this.setState({
-          gifs: res.data.gifs
+          gifs: res.data.gifs,
+          isLoading: false,
         });
       });
   }
@@ -211,8 +241,8 @@ class Main extends React.Component {
         setTimeout(() => {
           this.setState({ gifIndex: (i+1)});
           this.getCurrentGif();
-        }, currTime);
-      }, 3000);
+        }, currTime * 1000);
+      }, 2000);
     } else {
       this.setState({ gifIndex: -1, currGifUrl: ""});
     }
@@ -227,7 +257,7 @@ class Main extends React.Component {
       currSongId: selected.id,
       inputValue: selected.title,
       hideTopBtn: false,
-      gifIndex: 0,
+      gifIndex: -1,
     },  () => {
       console.log(this.state);
       this.retrieveGifs();
@@ -247,6 +277,7 @@ class Main extends React.Component {
         hideTopBtn : false,
         gifs: [],
         currGifUrl: "",
+        notFound: false,
         // gifIndex: -1,
       });
     }
@@ -265,15 +296,20 @@ class Main extends React.Component {
 
   handlePlay(e) {
     console.log("handling play");
-    this.setState({ hideTopBtn : true}, () => {
-      this.getCurrentGif();
-    });
-
+    if (this.state.gifs.length === 0) {
+      this.setState({notFound: true});
+    } else {
+      this.setState({ hideTopBtn : true, gifIndex: 0, notFound:false}, () => {
+        this.getCurrentGif();
+      });
+    }
   }
 
   render() {
     return (
       <div>
+        <NotFoundMessage notFound={this.state.notFound} />
+        <LoadingOverlay isLoading={this.state.isLoading} />
         <ReactCSSTransitionGroup
         transitionName="logo-anim" transitionAppear={true}
         transitionAppearTimeout={500}

@@ -6,9 +6,16 @@ from bs4 import BeautifulSoup
 import get_gif
 
 def get_lyrics(id):
+    print "\n The ID is: \n\n"
+    print id
+    print "\n\n\n\n"
     r = requests.get("http://video.google.com/timedtext?lang=en&"+ id)
     text = r.text
-    text = text.replace("&#39;", "")
+    text = text.replace("&amp;", "")
+    text = text.replace("#39;", "")
+    # Remove all non-alphanumeric characters
+    patt = re.compile('[^a-zA-Z0-9_\"=\\\/\n\t>< ]+')
+    text = patt.sub('', text)
 
     # first separate the lines
     lines = text.split(">")
