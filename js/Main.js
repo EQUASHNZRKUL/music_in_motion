@@ -25,18 +25,17 @@ function PlayButton (props) {
 
 class GifPlayer extends React.Component {
   render() {
-    if (this.props.currGifUrl !== "") {
+    if (this.props.currentGif !== "") {
       return(
         <div className="gif-player">
           <div className="gif-wrapper">
-            <img src={this.props.currGifUrl} alt="gif"/>
+            <img src={this.props.currentGif} alt="gif"/>
           </div>
         </div>
       );
     } else {
       return "";
     }
-
   }
 }
 
@@ -146,7 +145,7 @@ class Main extends React.Component {
       inputTimeout: null,
       hideTopBtn: false,
       currGifUrl: "",
-      gifIndex: null,
+      gifIndex: -1,
     };
   }
 
@@ -182,15 +181,17 @@ class Main extends React.Component {
   }
 
   getCurrentGif() {
-    if (this.state.gifIndex) {
+    if (this.state.gifIndex !== -1) {
       let i = this.state.gifIndex;
-      let currGif = this.state.gifs[i];
-      let currTime = this.state.timings[i];
-      this.setState({currGifUrl : currGif});
-      setTimeout(() => {
-        this.setState({ gifIndex: i++});
-        getCurrentGif();
-      }, currTime);
+      let currGif = this.state.gifs[i].url;
+      console.log(currGif);
+      let currTime = this.state.timings[i].duration;
+      this.setState({currGifUrl : currGif},  setTimeout(() => {
+        this.setState({ gifIndex: (i+1)});
+        this.getCurrentGif();
+      }, currTime));
+    } else {
+      console.log("hi");
     }
   }
 
@@ -202,8 +203,8 @@ class Main extends React.Component {
       currSongId: selected.id,
       inputValue: selected.title,
       hideTopBtn: false,
-    });
-    this.retrieveGifs();
+      gifIndex: 0,
+    }, this.retrieveGifs());
   }
 
   handleInputChange(e) {
@@ -219,7 +220,7 @@ class Main extends React.Component {
         hideTopBtn : false,
         gifs: [],
         currGifUrl: "",
-        gifIndex: null,
+        // gifIndex: -1,
       });
     }
 
@@ -236,8 +237,9 @@ class Main extends React.Component {
   }
 
   handlePlay(e) {
-    this.setState({ hideTopBtn : true, gifIndex : 0 });
-    getCurrentGif();
+    console.log("handling play");
+    this.setState({ hideTopBtn : true});
+    this.getCurrentGif();
   }
 
   render() {
@@ -250,7 +252,7 @@ class Main extends React.Component {
         transitionLeave={false}>
           <Logo key="logo"/>
         </ReactCSSTransitionGroup>
-        <GifPlayer key="player" currentGif={this.state.currGifUrl} />
+          <GifPlayer key="player" currentGif={this.state.currGifUrl} />
         <ReactCSSTransitionGroup
         transitionName="input-anim" transitionAppear={true}
         transitionAppearTimeout={500}
