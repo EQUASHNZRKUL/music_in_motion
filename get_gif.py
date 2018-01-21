@@ -66,7 +66,7 @@ def gifs_from_string(s):
         gif_url = r2_load["data"][0]["embed_url"]
         gif_frames = r2_load["data"][0]["images"]["original"]["frames"]
         framerate = 15 # assume 15 fps
-        duration = gif_frames / framerate
+        duration = int(gif_frames) / framerate
         url_lst.append((gif_url, duration))
     return url_lst
 

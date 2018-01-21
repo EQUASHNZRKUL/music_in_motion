@@ -185,31 +185,32 @@ class Main extends React.Component {
   }
 
   getCurrentGif() {
-    if (this.state.gifIndex > 0 && this.state.gifIndex < this.state.gifs.length
-                                && this.gifs.length > 0) {
+    if (this.state.gifIndex >= 0 && this.state.gifIndex < this.state.gifs.length
+                                && this.state.gifs.length > 0) {
       let i = this.state.gifIndex;
-      let currGif = this.state.gifs[i].url;
+      console.log(this.state)
+      let currGif = this.state.gifs[i][0];
       console.log(currGif);
-      let currTime = this.state.gifs[i].duration;
+      let currTime = this.state.gifs[i][1];
       console.log(currTime);
       this.setState({currGifUrl : currGif});
       setTimeout(() => {
         this.setState({ gifIndex: (i+1)});
         this.getCurrentGif();
       }, currTime * 1000);
-    } else if (this.state.gifIndex === 0 && this.gifs.length > 0) {
-      setTimeout(() => {
-        let i = this.state.gifIndex;
-        let currGif = this.state.gifs[i].url;
-        console.log(currGif);
-        let currTime = this.state.gifs[i].duration;
-        console.log(currTime);
-        this.setState({currGifUrl : currGif});
-        setTimeout(() => {
-          this.setState({ gifIndex: (i+1)});
-          this.getCurrentGif();
-        }, currTime * 1000);
-      }, 1000);
+    // } else if (this.state.gifIndex === 0 && this.state.gifs.length > 0) {
+    //   setTimeout(() => {
+    //     let i = this.state.gifIndex;
+    //     let currGif = this.state.gifs[i].url;
+    //     console.log(currGif);
+    //     let currTime = this.state.gifs[i].duration;
+    //     console.log(currTime);
+    //     this.setState({currGifUrl : currGif});
+    //     setTimeout(() => {
+    //       this.setState({ gifIndex: (i+1)});
+    //       this.getCurrentGif();
+    //     }, currTime);
+    //   }, 1000);
     } else {
       this.setState({ gifIndex: -1, currGifUrl: ""});
     }
@@ -229,7 +230,6 @@ class Main extends React.Component {
       console.log(this.state);
       this.retrieveGifs();
     });
-
   }
 
   handleInputChange(e) {
@@ -263,8 +263,10 @@ class Main extends React.Component {
 
   handlePlay(e) {
     console.log("handling play");
-    this.setState({ hideTopBtn : true});
-    this.getCurrentGif();
+    this.setState({ hideTopBtn : true}, () => {
+      this.getCurrentGif();
+    });
+
   }
 
   render() {
@@ -277,12 +279,12 @@ class Main extends React.Component {
         transitionLeave={false}>
           <Logo key="logo"/>
         </ReactCSSTransitionGroup>
-        <ReactCSSTransitionGroup
+        {/* <ReactCSSTransitionGroup
         transitionName="gifplayer-anim"
         transitionEnterTimeout={500}
-        transitionLeaveTimeout={500}>
+        transitionLeaveTimeout={500}> */}
           <GifPlayer key="player" currentGif={this.state.currGifUrl} />
-        </ReactCSSTransitionGroup>
+        {/* </ReactCSSTransitionGroup> */}
         <ReactCSSTransitionGroup
         transitionName="input-anim" transitionAppear={true}
         transitionAppearTimeout={500}
