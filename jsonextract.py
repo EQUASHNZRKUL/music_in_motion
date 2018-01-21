@@ -8,17 +8,6 @@ def jsonextract(filename):
         return d
 
 def get_duration(song_name):
-    # first we need to authenticate
-    # client_id = ...
-    # client_secret = ...
-    # grant_type = 'client_credentials'
-    #Request based on Client Credentials Flow from https://developer.spotify.com/web-api/authorization-guide/
-    #Request body parameter: grant_type Value: Required. Set it to client_credentials
-    # body_params = {'grant_type' : grant_type}
-    # url='https://accounts.spotify.com/api/token'
-    # response=requests.post(url, data=body_params, auth = (client_id, client_secret)) 
-    # print response
-
     heads = {}
     file = open("spotify_key.txt", 'r')
     key = file.read()
@@ -50,5 +39,7 @@ def get_top_five(song_name):
         info['artist_name'] = songs[i]['artists'][0]['name']
         info['album_name'] = songs[i]['album']['name']
         info['album_art'] = songs[i]['album']['images'][3]['url']
+        info['uri'] = songs[i]['uri']
+        info['id'] = songs[i]['id']
         info_lst.append(info)
     return info_lst
