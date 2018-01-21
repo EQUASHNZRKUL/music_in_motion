@@ -270,6 +270,8 @@ h1, h2, h3, h4, h5 {
 
 .gif-wrapper img {
   object-fit: cover;
+  min-height: 100%;
+  width: 100%;
 }
 
 .gifplayer-anim-appear {
@@ -319,18 +321,25 @@ h1, h2, h3, h4, h5 {
   font-size: 3.75rem;
 }
 
+.not-found-wrapper {
+  position: fixed;
+  width: 100%;
+  top: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+}
+
 .not-found {
-  position: absolute;
   width: 500px;
   padding: 16px;
-  color: #62a6ff;
+  color: #00b359;
   font-weight: 700;
   background: rgba(0, 0, 0, 0.75);
   border: 2px solid #00b359;
   border-radius: 16px;
-  z-index: 3;
   top: 250px;
-  margin: 0 auto;
   text-align: center;
-  display: block;
+  display: inline-block;
 }

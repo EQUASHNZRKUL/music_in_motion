@@ -312,6 +312,8 @@ h1, h2, h3, h4, h5 {
   border-radius: 16px;
   img {
     object-fit: cover;
+    min-height: 100%;
+    width: 100%;
   }
 }
 
@@ -361,18 +363,26 @@ h1, h2, h3, h4, h5 {
   @include font-size(60px);
 }
 
+
+.not-found-wrapper {
+  position: fixed;
+  width: 100%;
+  top: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+
+}
 .not-found {
-  position: absolute;
   width: 500px;
   padding: 16px;
-  color: $accent;
+  color: $base;
   font-weight: 700;
   background: rgba(0,0,0,.75);
   border: 2px solid $base;
   border-radius: 16px;
-  z-index: 3;
   top: 250px;
-  margin: 0 auto;
   text-align: center;
-  display: block;
+  display: inline-block;
 }

@@ -16,8 +16,8 @@ class Logo extends React.Component{
 function LoadingOverlay(props) {
   if (props.isLoading) {
     return (<div className="loading-overlay">
-      <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-      <span class="sr-only">Loading...</span>
+      <i className="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+      <span className="sr-only">Loading...</span>
     </div>);
   } else {
     return "";
@@ -27,7 +27,9 @@ function LoadingOverlay(props) {
 function NotFoundMessage(props) {
   if (props.notFound) {
     return (
-      <h1 className="not-found">No gifs found</h1>
+      <div className="not-found-wrapper">
+        <h1 className="not-found">No gifs found</h1>
+      </div>
     );
   } else {
     return "";
