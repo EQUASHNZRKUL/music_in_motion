@@ -8,6 +8,7 @@ import get_gif
 def get_lyrics(id):
     r = requests.get("http://video.google.com/timedtext?lang=en&"+ id)
     text = r.text
+    text = text.replace("&#39;", "")
 
     # first separate the lines
     lines = text.split(">")

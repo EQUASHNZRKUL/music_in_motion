@@ -51,6 +51,8 @@ def gifs_from_string(s):
     url_lst = []
 
     for phrase in string_2_search:
+        print "\n The phrase is: "
+        print phrase
         # print phrase
         params = urllib.urlencode({
             'limit': '2',
@@ -67,6 +69,8 @@ def gifs_from_string(s):
         gif_frames = r2_load["data"][0]["images"]["original"]["frames"]
         framerate = 15 # assume 15 fps
         duration = gif_frames / framerate
+        print "\n The gif url is: "
+        print gif_url
         url_lst.append((gif_url, duration))
     return url_lst
 
