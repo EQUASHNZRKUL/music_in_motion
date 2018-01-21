@@ -105,16 +105,43 @@ h1, h2, h3, h4, h5 {
   @include font-size (96px);
   display: block;
   text-align: center;
+  transition: .25s ease;
   .fa-music {
     display: block;
     @include font-size (64px);
   }
 }
 
+
+.logo-anim-appear {
+  transform: translate(0, -100px);
+  opacity: 0.01;
+}
+
+.logo-appear.logo-anim-appear-active {
+  transform: translate(0, 0);
+  opacity: 1;
+  transition: all 1s ease;
+}
+
+// Input form ==================================================================
+.input-anim-appear {
+  transform: translate(0, 100px);
+  opacity: 0.01;
+}
+
+.input-appear.input-anim-appear-active {
+  transform: translate(0, 0);
+  opacity: 1;
+  transition: all 1s ease;
+}
+
 .input-form {
   max-width: 900px;
-  margin: 32px auto;
+  margin: 32px auto 0px auto;
   text-align: center;
+  display: block;
+  transition: .25s ease;
 }
 
 .input-wrapper {
@@ -126,11 +153,11 @@ h1, h2, h3, h4, h5 {
 .input {
   width: 100%;
   background: $darkGrey;
-  padding: 6px 6px 6px 48px;
+  padding: 6px 6px 6px 42px;
   border: unset;
   border-bottom: 2px solid $lightGrey;
   font-family: $body;
-  @include font-size (36px);
+  @include font-size (28px);
   color: $white;
   outline: none;
   transition: .2s ease-in-out;
@@ -146,7 +173,7 @@ h1, h2, h3, h4, h5 {
   position: absolute;
   top: 6px;
   left: 2px;
-  @include font-size (36px);
+  @include font-size (28px);
   color: $lightGrey;
   transition: .2s ease-in-out;
 }
@@ -176,6 +203,69 @@ h1, h2, h3, h4, h5 {
     border-color: $accent;
     background: $accent;
   }
+}
 
+.search-entry-list {
+  margin: 0 auto;
+  width: 100%;
+  position: absolute;
+  top: 54px;
+  left: 0;
+}
 
+.search-entry {
+  display: block;
+  text-align: left;
+  background: $darkGrey;
+  margin-bottom: 6px;
+}
+.search-btn {
+  width: 100%;
+  height: 100%;
+  background: lighten($darkGrey, 5);
+  margin: 0;
+  padding: 0;
+  outline:none;
+  border: 4px solid lighten($darkGrey, 5);
+  transition: all .25s ease;
+  &:hover {
+    border-bottom: 4px solid $accent;
+  }
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+}
+
+.song-description {
+  margin-left: 16px;
+  text-align: left;
+
+}
+.song-img {
+  width: 64px;
+  height: 64px;
+  margin-top: 2px;
+}
+
+.song-title {
+  font-weight: 700;
+  color: $base;
+}
+
+.song-album {
+  font-weight: 300;
+  color: $accent;
+}
+
+.song-artist {
+  font-weight: 400;
+  @include font-size(18px);
+  color: $white;
+}
+
+.spotify-btn {
+  border-radius: 50%;
+  outline: none;
+  border: 0px;
 }

@@ -12,13 +12,16 @@
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.4.5",
-    "babel-loader": "^6.2.1",
+    "babel-loader": "^7.1.2",
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
-    "webpack": "^1.12.12"
+    "webpack": "^3.10.0"
   },
   "dependencies": {
-    "react": "^0.14.7",
-    "react-dom": "^0.14.7"
+    "axios": "^0.17.1",
+    "react": "^16.2.0",
+    "react-addons-css-transition-group": "^15.6.2",
+    "react-dom": "*",
+    "react-transition-group": "*"
   }
 }

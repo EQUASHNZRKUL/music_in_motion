@@ -4,3 +4,5 @@ node_modules
 static/bundle.js
 key.txt
 key2.txt
+spotifysdk.txt
+.vscode
