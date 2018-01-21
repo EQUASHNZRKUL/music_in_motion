@@ -40,5 +40,6 @@ def get_top_five(song_name):
         info['album_name'] = songs[i]['album']['name']
         info['album_art'] = songs[i]['album']['images'][3]['url']
         info['uri'] = songs[i]['uri']
+        info['id'] = songs[i]['id']
         info_lst.append(info)
     return info_lst

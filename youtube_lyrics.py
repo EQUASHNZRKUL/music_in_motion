@@ -27,8 +27,8 @@ def search_video(name):
     response = urllib2.urlopen(url)
     html = response.read()
     soup = BeautifulSoup(html)
-    vid = soup.findAll(attrs={'class':'yt-uix-tile-link'})[0]
+    vid['href'] = soup.findAll(attrs={'class':'yt-uix-tile-link'})[0]
     vid_l = vid.replace("/watch?", "")
     (lines, durations) = get_lyrics(vid_l)
     gifs = get_gif.get_gif_list(lines)
-    return (gifs, durations) # returns a list 
+    return (gifs, durations) # returns (list of list of gifs, list of durations)
