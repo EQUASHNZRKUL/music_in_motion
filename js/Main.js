@@ -182,7 +182,8 @@ class Main extends React.Component {
   }
 
   getCurrentGif() {
-    if (this.state.gifIndex > 0 && this.state.gifIndex < this.state.gifs.length) {
+    if (this.state.gifIndex > 0 && this.state.gifIndex < this.state.gifs.length
+                                && this.gifs.length > 0) {
       let i = this.state.gifIndex;
       let currGif = this.state.gifs[i].url;
       console.log(currGif);
@@ -193,7 +194,7 @@ class Main extends React.Component {
         this.setState({ gifIndex: (i+1)});
         this.getCurrentGif();
       }, currTime * 1000);
-    } else if (this.state.gifIndex === 0) {
+    } else if (this.state.gifIndex === 0 && this.gifs.length > 0) {
       setTimeout(() => {
         let i = this.state.gifIndex;
         let currGif = this.state.gifs[i].url;
@@ -273,7 +274,13 @@ class Main extends React.Component {
         transitionLeave={false}>
           <Logo key="logo"/>
         </ReactCSSTransitionGroup>
+        <ReactCSSTransitionGroup
+        transitionName="gifplayer-anim" transitionAppear={true}
+        transitionAppearTimeout={500}
+        transitionEnter={true} 
+        transitionLeave={true}>
           <GifPlayer key="player" currentGif={this.state.currGifUrl} />
+        </ReactCSSTransitionGroup>
         <ReactCSSTransitionGroup
         transitionName="input-anim" transitionAppear={true}
         transitionAppearTimeout={500}
