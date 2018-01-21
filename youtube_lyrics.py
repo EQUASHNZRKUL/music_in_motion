@@ -27,7 +27,13 @@ def get_lyrics(id):
     p2 = re.compile('dur=[a-zA-Z0-9_]*')
     new_list2 = filter(p2.search, lines)
     new_list2 = [s[(s.find("dur=")+5):-1] for s in new_list2]
-    return (lst, new_list2)
+
+    # third separate the start values
+    p3 = re.compile('start=[a-zA-Z0-9_]*')
+    nl3 = filter(p3.search, lines)
+    nl3 = [s[(s.find("start=")+7):(s.find("\" "))] for s in nl3]
+
+    return (lst, new_list2, nl3)
 
 def search_video(name):
     query = urllib.quote(name)
@@ -37,6 +43,6 @@ def search_video(name):
     soup = BeautifulSoup(html)
     vid = soup.findAll(attrs={'class':'yt-uix-tile-link'})[0]
     vid_l = vid['href'].replace("/watch?", "")
-    (lines, durations) = get_lyrics(vid_l)
+    (lines, durations, starts) = get_lyrics(vid_l)
     gifs = get_gif.get_gif_list(lines)
     return (gifs, durations) # returns (list of list of gifs, list of durations)
