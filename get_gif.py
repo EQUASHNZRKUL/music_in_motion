@@ -67,4 +67,5 @@ def get_gif_list(stanza_lst):
     gifs = []
     for stanza in stanza_lst:
         gif_urls = gifs_from_string(stanza)
-        gif_lst.append(gif_urls)
+        gifs.append(gif_urls)
+    return gifs
