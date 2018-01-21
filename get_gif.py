@@ -51,37 +51,13 @@ def gifs_from_string(s):
     url_lst = []
 
     for phrase in string_2_search:
-<<<<<<< HEAD
-        if len(phrase.split(" ")) > 1:
-            # print "\n The phrase is: "
-            # print phrase
-            # print phrase
-            params = urllib.urlencode({
-                'limit': '2',
-                'rating': 'pg',
-                'lang': 'en',
-                'api_key': key2[0:(len(key2)-1)],
-                'q': phrase.encode('utf-8')
-            })
-            r2 = urllib2.urlopen('http://api.giphy.com/v1/gifs/search?' + params)
-            r2_read = r2.read()
-            # print r2_read
-            r2_load = json.loads(r2_read)
-            gif_url = r2_load["data"][0]["images"]["original"]["url"]
-            gif_frames = r2_load["data"][0]["images"]["original"]["frames"]
-            framerate = 15 # assume 15 fps
-            duration = int(gif_frames) / framerate
-            # print "\n The gif url is: "
-            # print gif_url
-            url_lst.append((gif_url, duration))
-=======
         if len(phrase.split(" ")) == 1:
             phrase = s
         print "\n The phrase is: "
         print phrase
         # print phrase
         params = urllib.urlencode({
-            'limit': '3',
+            'limit': '2',
             'rating': 'pg',
             'lang': 'en',
             'api_key': key2[0:(len(key2)-1)],
@@ -89,9 +65,8 @@ def gifs_from_string(s):
         })
         r2 = urllib2.urlopen('http://api.giphy.com/v1/gifs/search?' + params)
         r2_read = r2.read()
-        # print r2_read
+        print r2_read
         r2_load = json.loads(r2_read)
-<<<<<<< HEAD
         gif_url = r2_load["data"][0]["images"]["original"]["url"]
         gif_frames = r2_load["data"][0]["images"]["original"]["frames"]
         framerate = 15 # assume 15 fps
@@ -99,21 +74,6 @@ def gifs_from_string(s):
         print "\n The gif url is: "
         print gif_url
         url_lst.append((gif_url, duration))
->>>>>>> 915c55409f8e144e62a515e7f604e54044129c00
-=======
-        for i in range(3):
-            try:
-                gif_url = r2_load["data"][i]["images"]["original"]["url"]
-                gif_frames = r2_load["data"][i]["images"]["original"]["frames"]
-                framerate = 15 # assume 15 fps
-                duration = int(gif_frames) / framerate
-                print "\n The gif url is: "
-                print gif_url
-                url_lst.append((gif_url, duration))
-            except:
-                gif_url = ""
-                gif_frames = "0"
->>>>>>> 17024d3f2dcf9d844cfb3cdb09c492e2a16507f3
     return url_lst
 
 def get_gif_list(stanza_lst):
