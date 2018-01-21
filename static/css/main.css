@@ -61,6 +61,11 @@ h1, h2, h3, h4, h5 {
   font-size: 4rem;
 }
 
+.logo a {
+  text-decoration: none;
+  color: #00b359;
+}
+
 .logo-anim-appear {
   transform: translate(0, -100px);
   opacity: 0.01;

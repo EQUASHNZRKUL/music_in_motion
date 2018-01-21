@@ -110,6 +110,10 @@ h1, h2, h3, h4, h5 {
   .fa-music {
     display: block;
     @include font-size (64px);
+  } 
+  a {
+    text-decoration: none;
+    color: $base;
   }
 }
 

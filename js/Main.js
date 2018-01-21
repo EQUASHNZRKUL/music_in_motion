@@ -5,8 +5,10 @@ import axios from 'axios';
 class Logo extends React.Component{
   render() {
     return (<h1 id="logo" className="logo">
-    <i className="fa fa-music" aria-hidden="true"></i> 
-      music n motion
+      <a href="/">
+        <i className="fa fa-music" aria-hidden="true"></i> 
+        music n motion
+      </a>
        </h1>);
   }
 }
@@ -185,7 +187,7 @@ class Main extends React.Component {
   }
 
   getCurrentGif() {
-    if (this.state.gifIndex >= 0 && this.state.gifIndex < this.state.gifs.length
+    if (this.state.gifIndex > 0 && this.state.gifIndex < this.state.gifs.length
                                 && this.state.gifs.length > 0) {
       let i = this.state.gifIndex;
       console.log(this.state)
@@ -198,19 +200,19 @@ class Main extends React.Component {
         this.setState({ gifIndex: (i+1)});
         this.getCurrentGif();
       }, currTime * 1000);
-    // } else if (this.state.gifIndex === 0 && this.state.gifs.length > 0) {
-    //   setTimeout(() => {
-    //     let i = this.state.gifIndex;
-    //     let currGif = this.state.gifs[i].url;
-    //     console.log(currGif);
-    //     let currTime = this.state.gifs[i].duration;
-    //     console.log(currTime);
-    //     this.setState({currGifUrl : currGif});
-    //     setTimeout(() => {
-    //       this.setState({ gifIndex: (i+1)});
-    //       this.getCurrentGif();
-    //     }, currTime);
-    //   }, 1000);
+    } else if (this.state.gifIndex === 0 && this.state.gifs.length > 0) {
+      setTimeout(() => {
+        let i = this.state.gifIndex;
+        let currGif = this.state.gifs[i].url;
+        console.log(currGif);
+        let currTime = this.state.gifs[i].duration;
+        console.log(currTime);
+        this.setState({currGifUrl : currGif});
+        setTimeout(() => {
+          this.setState({ gifIndex: (i+1)});
+          this.getCurrentGif();
+        }, currTime);
+      }, 3000);
     } else {
       this.setState({ gifIndex: -1, currGifUrl: ""});
     }
@@ -279,12 +281,12 @@ class Main extends React.Component {
         transitionLeave={false}>
           <Logo key="logo"/>
         </ReactCSSTransitionGroup>
-        {/* <ReactCSSTransitionGroup
+        <ReactCSSTransitionGroup
         transitionName="gifplayer-anim"
         transitionEnterTimeout={500}
-        transitionLeaveTimeout={500}> */}
+        transitionLeaveTimeout={500}>
           <GifPlayer key="player" currentGif={this.state.currGifUrl} />
-        {/* </ReactCSSTransitionGroup> */}
+        </ReactCSSTransitionGroup>
         <ReactCSSTransitionGroup
         transitionName="input-anim" transitionAppear={true}
         transitionAppearTimeout={500}
