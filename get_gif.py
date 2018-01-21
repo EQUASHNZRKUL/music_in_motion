@@ -72,3 +72,24 @@ def get_gif_list(stanza_lst):
         gif_urls = gifs_from_string(stanza)
         gifs.append(gif_urls)
     return gifs
+
+''' wesify_giflist converts a giftuple array (tuples of gifs and their durations)
+    and a duration list (list of durations of lines) and returns the list of
+    gifs that will be played and their expected durations as a tuple list. 
+'''
+def wesify_giflist(gifarray, duration_list):
+    wes_list = []
+    for i in range(len(duration_list)):
+        giflist = gifarray[i]
+        duration_lim = duration_list[i]
+        duracc = 0
+        for giftuple in giflist:
+            duration = giftuple[1]
+            if (duracc + duration) >= duration_lim: # check if this gif in the list will make it into the video. 
+                duration = duration_lim - duracc # gives remainder time to final gif
+                wes_list = wes_list + [(giftuple[0], duration)] # add gif and duration to wes_list & finish
+                break
+            else: # if whole gif fits in designated duration limit
+                duracc = duracc + duration # increase duration taken up
+                wes_list = wes_list + [(giftuple[0], duration)] # add gif and duration to wes_list & repeat
+    return wes_list
