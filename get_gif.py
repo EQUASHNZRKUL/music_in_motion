@@ -64,7 +64,10 @@ def gifs_from_string(s):
         print r2_read
         r2_load = json.loads(r2_read)
         gif_url = r2_load["data"][0]["embed_url"]
-        url_lst.append(gif_url)
+        gif_frames = r2_load["data"][0]["images"]["original"]["frames"]
+        framerate = 15 # assume 15 fps
+        duration = gif_frames / framerate
+        url_lst.append((gif_url, duration))
     return url_lst
 
 def get_gif_list(stanza_lst):
