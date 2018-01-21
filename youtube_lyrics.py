@@ -45,4 +45,4 @@ def search_video(name):
     vid_l = vid['href'].replace("/watch?", "")
     (lines, durations, starts) = get_lyrics(vid_l)
     gifs = get_gif.get_gif_list(lines)
-    return (gifs, durations) # returns (list of list of gifs, list of durations)
+    return (gifs, durations, starts) # returns (list of list of gifs, list of durations)
