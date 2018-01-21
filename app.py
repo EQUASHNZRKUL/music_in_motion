@@ -9,6 +9,8 @@ def hello_world():
 @app.route('/getSongs', methods=['POST'])
 def get_songs():
   song = request.get_json()['songTitle']
+  # search = jsonextract.get_top_five(song)
+  # res = json.dumps({"searchResults" : search})
   res = json.dumps({"searchResults" : [
     {
       "title" : "What I've Done",
