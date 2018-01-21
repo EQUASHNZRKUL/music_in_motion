@@ -283,3 +283,23 @@ h1, h2, h3, h4, h5 {
   // top: 0;
   // left: 0;
 }
+
+.gif-player {
+  margin: 0 auto;
+  max-width: 500px;
+  background-color: $base;
+  text-align: center;
+  padding: 8px;
+  border-radius: 16px;
+}
+.gif-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 16px;
+  img {
+    object-fit: cover;
+    min-width: 100%;
+    height: 100%;
+  }
+}
