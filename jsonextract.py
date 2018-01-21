@@ -35,10 +35,10 @@ def get_top_five(song_name):
     info_lst = []
     for i in range(0, 4):
         info = {}
-        info['track_name'] = songs[i]['name']
-        info['artist_name'] = songs[i]['artists'][0]['name']
-        info['album_name'] = songs[i]['album']['name']
-        info['album_art'] = songs[i]['album']['images'][3]['url']
+        info['title'] = songs[i]['name']
+        info['artist'] = songs[i]['artists'][0]['name']
+        info['album'] = songs[i]['album']['name']
+        info['art'] = songs[i]['album']['images'][3]['url']
         info['uri'] = songs[i]['uri']
         info['id'] = songs[i]['id']
         info_lst.append(info)
