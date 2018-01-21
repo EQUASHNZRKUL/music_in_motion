@@ -25,18 +25,17 @@ function PlayButton (props) {
 
 class GifPlayer extends React.Component {
   render() {
-    if (this.props.currGifUrl !== "") {
+    if (this.props.currentGif !== "") {
       return(
         <div className="gif-player">
           <div className="gif-wrapper">
-            <img src={this.props.currGifUrl} alt="gif"/>
+            <img src={this.props.currentGif} alt="gif"/>
           </div>
         </div>
       );
     } else {
       return "";
     }
-
   }
 }
 
@@ -146,7 +145,7 @@ class Main extends React.Component {
       inputTimeout: null,
       hideTopBtn: false,
       currGifUrl: "",
-      gifIndex: null,
+      gifIndex: -1,
     };
   }
 
@@ -172,7 +171,8 @@ class Main extends React.Component {
   }
 
   retrieveGifs() {
-    let data = { songId : this.state.currSongId }
+    let data = { songId : this.state.currSongId, songTitle : this.state.inputValue };
+    console.log(data);
     axios.post('/getGifs', data)
       .then(res => {
         this.setState({
@@ -182,28 +182,50 @@ class Main extends React.Component {
   }
 
   getCurrentGif() {
-    if (this.state.gifIndex) {
+    if (this.state.gifIndex > 0 && this.state.gifIndex < this.state.gifs.length) {
       let i = this.state.gifIndex;
-      let currGif = this.state.gifs[i];
-      let currTime = this.state.timings[i];
+      let currGif = this.state.gifs[i].url;
+      console.log(currGif);
+      let currTime = this.state.gifs[i].duration;
+      console.log(currTime);
       this.setState({currGifUrl : currGif});
       setTimeout(() => {
-        this.setState({ gifIndex: i++});
-        getCurrentGif();
-      }, currTime);
+        this.setState({ gifIndex: (i+1)});
+        this.getCurrentGif();
+      }, currTime * 1000);
+    } else if (this.state.gifIndex === 0) {
+      setTimeout(() => {
+        let i = this.state.gifIndex;
+        let currGif = this.state.gifs[i].url;
+        console.log(currGif);
+        let currTime = this.state.gifs[i].duration;
+        console.log(currTime);
+        this.setState({currGifUrl : currGif});
+        setTimeout(() => {
+          this.setState({ gifIndex: (i+1)});
+          this.getCurrentGif();
+        }, currTime * 1000);
+      }, 1000);
+    } else {
+      this.setState({ gifIndex: -1, currGifUrl: ""});
     }
   }
 
   // get gifs
   handleClickSearchEntry(i) {
     let selected = this.state.searchResults[i];
+    console.log(selected);
     this.setState({
       currSongUri: selected.uri,
       currSongId: selected.id,
       inputValue: selected.title,
       hideTopBtn: false,
+      gifIndex: 0,
+    },  () => {
+      console.log(this.state);
+      this.retrieveGifs();
     });
-    this.retrieveGifs();
+
   }
 
   handleInputChange(e) {
@@ -219,7 +241,7 @@ class Main extends React.Component {
         hideTopBtn : false,
         gifs: [],
         currGifUrl: "",
-        gifIndex: null,
+        // gifIndex: -1,
       });
     }
 
@@ -236,8 +258,9 @@ class Main extends React.Component {
   }
 
   handlePlay(e) {
-    this.setState({ hideTopBtn : true, gifIndex : 0 });
-    getCurrentGif();
+    console.log("handling play");
+    this.setState({ hideTopBtn : true});
+    this.getCurrentGif();
   }
 
   render() {
@@ -250,7 +273,7 @@ class Main extends React.Component {
         transitionLeave={false}>
           <Logo key="logo"/>
         </ReactCSSTransitionGroup>
-        <GifPlayer key="player" currentGif={this.state.currGifUrl} />
+          <GifPlayer key="player" currentGif={this.state.currGifUrl} />
         <ReactCSSTransitionGroup
         transitionName="input-anim" transitionAppear={true}
         transitionAppearTimeout={500}
