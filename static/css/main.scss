@@ -247,6 +247,7 @@ h1, h2, h3, h4, h5 {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  align-items: center;
   flex-wrap: nowrap;
 }
 
@@ -258,7 +259,6 @@ h1, h2, h3, h4, h5 {
 .song-img {
   width: 64px;
   height: 64px;
-  margin-top: 2px;
 }
 
 .song-title {

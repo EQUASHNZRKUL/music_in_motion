@@ -31,6 +31,9 @@ class GifPlayer extends React.Component {
           <div className="gif-wrapper">
             <img src={this.props.currentGif} alt="gif"/>
           </div>
+          {/* <div className="lyrics-wrapper">
+            <p className="lyrics">Tesst amsldkfmkasd asdkfksdmf</p>
+          </div> */}
         </div>
       );
     } else {
@@ -275,10 +278,9 @@ class Main extends React.Component {
           <Logo key="logo"/>
         </ReactCSSTransitionGroup>
         <ReactCSSTransitionGroup
-        transitionName="gifplayer-anim" transitionAppear={true}
-        transitionAppearTimeout={500}
-        transitionEnter={true} 
-        transitionLeave={true}>
+        transitionName="gifplayer-anim"
+        transitionEnterTimeout={500}
+        transitionLeaveTimeout={500}>
           <GifPlayer key="player" currentGif={this.state.currGifUrl} />
         </ReactCSSTransitionGroup>
         <ReactCSSTransitionGroup
