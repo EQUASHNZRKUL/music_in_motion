@@ -59,7 +59,8 @@ html {
 
 body {
   width: 100%;
-  padding: 10% 32px 0px 32px;
+  padding: 10% 32px 128px 32px;
+  overflow: show;
 }
 
 html {
@@ -140,8 +141,10 @@ h1, h2, h3, h4, h5 {
   max-width: 900px;
   margin: 32px auto 0px auto;
   text-align: center;
-  display: block;
+  display: flex;
   transition: .25s ease;
+  justify-content: center;
+  align-items: center;
 }
 
 .input-wrapper {
@@ -178,31 +181,41 @@ h1, h2, h3, h4, h5 {
   transition: .2s ease-in-out;
 }
 
-.input-btn {
+.input-btn-wrapper {
   background: rgba(0,0,0,0);
   width: 64px;
   height: 64px;
-  border: 2px solid $lightGrey;
+  border: 4px solid $lightGrey;
   margin-left: 16px;
   color: $lightGrey;
   @include font-size (36px);
   display: inline-flex;
   justify-content: center;
-  padding-left: 12px;
   align-items: center;
-  // text-align: center;
+  text-align: center;
   border-radius: 50%;
+  position: relative;
   outline: none;
-  transition: .2s ease-in-out;
+  overflow: hidden;
+  transition: .2s ease;
   &:hover {
-    color: $accent;
     border-color: $accent;
   }
   &:active {
-    color: $darkGrey;
-    border-color: $accent;
-    background: $accent;
+    border-color: $base;
   }
+}
+
+.input-btn {
+  transition: .2s ease-in-out;
+  background: rgba(0,0,0,0);
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
 }
 
 .search-entry-list {
@@ -265,7 +278,8 @@ h1, h2, h3, h4, h5 {
 }
 
 .spotify-btn {
-  border-radius: 50%;
-  outline: none;
-  border: 0px;
+  position: relative;
+  z-index: 0;
+  // top: 0;
+  // left: 0;
 }

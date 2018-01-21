@@ -13,16 +13,34 @@ def get_songs():
     {
       "title" : "What I've Done",
       "art" : "https://i.scdn.co/image/9b5e12a4d057a8b4313842ee481a9d8ea82945cd",
-      "uri" : "bbbbbb",
+      "uri" : "spotify:track:40riOy7x9W7GXjyGp4pjAv",
       "artist" : "Linkin Park",
-      "album" : "Minutes to Midnight"
+      "album" : "Minutes to Midnight",
+      "id" : 123123
     },
     {
       "title": "What I've Done - One More Light live",
       "art" : "https://i.scdn.co/image/9b5e12a4d057a8b4313842ee481a9d8ea82945cd",
-      "uri" : 'asdfasdfasdf',
+      "uri" : "spotify:track:0GOJobsbOSIF99y6CGr5o6",
       "artist" : "Linkin Park",
-      "album" : "Minutes to Midnight"
+      "album" : "Minutes to Midnight",
+      "id" : 12312
+    },
+      {
+      "title": "What I've Done - One More Light live",
+      "art" : "https://i.scdn.co/image/9b5e12a4d057a8b4313842ee481a9d8ea82945cd",
+      "uri" : "spotify:track:0GOJobsbOSIF99y6CGr5o6",
+      "artist" : "Linkin Park",
+      "album" : "Minutes to Midnight",
+      "id" : 55555
+    },
+      {
+      "title": "What I've Done - One More Light live",
+      "art" : "https://i.scdn.co/image/9b5e12a4d057a8b4313842ee481a9d8ea82945cd",
+      "uri" : "spotify:track:0GOJobsbOSIF99y6CGr5o6",
+      "artist" : "Linkin Park",
+      "album" : "Minutes to Midnight",
+      "id" : 55555
     }
   ]})
   return res
