@@ -18,7 +18,7 @@ def gifs_from_string(s):
       ]
     }
     '''
-    print s
+    # print s
     raw = {}
     raw["text"] = s
     raw["language"] = "en"
@@ -39,10 +39,10 @@ def gifs_from_string(s):
         r2 = json.loads(r.text)
         string_2_search = r2["documents"][0]["keyPhrases"]
     else:
-        string_2_search = s
+        string_2_search = [s]
     if string_2_search == []:
-        string_2_search = s
-    print(string_2_search)
+        string_2_search = [s]
+    # print(string_2_search)
     
     # now we get the gifs
     file2 = open("key2.txt", 'r')
@@ -51,6 +51,7 @@ def gifs_from_string(s):
     url_lst = []
 
     for phrase in string_2_search:
+        # print phrase
         params = urllib.urlencode({
             'limit': '2',
             'rating': 'pg',
@@ -60,6 +61,7 @@ def gifs_from_string(s):
         })
         r2 = urllib2.urlopen('http://api.giphy.com/v1/gifs/search?' + params)
         r2_read = r2.read()
+        print r2_read
         r2_load = json.loads(r2_read)
         gif_url = r2_load["data"][0]["embed_url"]
         url_lst.append(gif_url)
