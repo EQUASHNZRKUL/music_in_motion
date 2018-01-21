@@ -37,7 +37,10 @@ def gifs_from_string(s):
     r = requests.post(url, data=dta, headers=headers)
     if r.status_code == 200:
         r2 = json.loads(r.text)
-        string_2_search = r2["documents"][0]["keyPhrases"]
+        try:
+            string_2_search = r2["documents"][0]["keyPhrases"]
+        except:
+            string_2_search = [s]
     else:
         string_2_search = [s]
     if string_2_search == []:
