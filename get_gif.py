@@ -57,7 +57,7 @@ def gifs_from_string(s):
         print phrase
         # print phrase
         params = urllib.urlencode({
-            'limit': '2',
+            'limit': '3',
             'rating': 'pg',
             'lang': 'en',
             'api_key': key2[0:(len(key2)-1)],
@@ -65,7 +65,7 @@ def gifs_from_string(s):
         })
         r2 = urllib2.urlopen('http://api.giphy.com/v1/gifs/search?' + params)
         r2_read = r2.read()
-        print r2_read
+        # print r2_read
         r2_load = json.loads(r2_read)
         for i in range(3):
             try:
