@@ -71,7 +71,7 @@ def get_gifs():
   title = request.get_json()['songTitle']
   print (title)
   gifdata = youtube_lyrics.search_video(title)
-  giflist = get_gif.wesify_giflist(gifdata[0], gifdata[1])
+  giflist = get_gif.wesify_giflist(gifdata[0], gifdata[1], gifdata[2])
   res = json.dumps({"gifs" : giflist})
   print (gifdata)
   return res

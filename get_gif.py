@@ -52,8 +52,8 @@ def gifs_from_string(s):
 
     for phrase in string_2_search:
         if len(phrase.split(" ")) > 1:
-            print "\n The phrase is: "
-            print phrase
+            # print "\n The phrase is: "
+            # print phrase
             # print phrase
             params = urllib.urlencode({
                 'limit': '2',
@@ -64,14 +64,14 @@ def gifs_from_string(s):
             })
             r2 = urllib2.urlopen('http://api.giphy.com/v1/gifs/search?' + params)
             r2_read = r2.read()
-            print r2_read
+            # print r2_read
             r2_load = json.loads(r2_read)
             gif_url = r2_load["data"][0]["images"]["original"]["url"]
             gif_frames = r2_load["data"][0]["images"]["original"]["frames"]
             framerate = 15 # assume 15 fps
             duration = int(gif_frames) / framerate
-            print "\n The gif url is: "
-            print gif_url
+            # print "\n The gif url is: "
+            # print gif_url
             url_lst.append((gif_url, duration))
     return url_lst
 
@@ -87,11 +87,14 @@ def get_gif_list(stanza_lst):
     and a duration list (list of durations of lines) and returns the list of
     gifs that will be played and their expected durations as a tuple list. 
 '''
-def wesify_giflist(gifarray, duration_list):
+def wesify_giflist(gifarray, duration_list, start_list):
     wes_list = []
     for i in range(len(duration_list)):
         giflist = gifarray[i]
-        duration_lim = duration_list[i]
+        if (i == len(duration_list)-1):
+            duration_lim = duration_list[i]
+        else:
+            duration_lim = start_list[i+1] - start_list[i]
         duracc = 0
         for giftuple in giflist:
             duration = giftuple[1]
