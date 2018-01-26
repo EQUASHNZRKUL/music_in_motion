@@ -73,3 +73,9 @@ Then run the Flask app:
 python app.py
 ```
 
+## Keys
+In order for the app to work, you'll need the following API keys stored in the main directory of the project
+1. Microsoft cognitive services, text analytics API key stored in the file ```key.txt```.
+2. Giphy API key stored in ```key2.txt```.
+3. Spotify API access token stored in ```spotify_key.txt```.
+
